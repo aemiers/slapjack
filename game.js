@@ -7,8 +7,12 @@ class Game {
 
   }
 
-  playerTurn() {
-
+  alternateTurns() {
+    // if (this.currentPlayer === this.player1) {
+    //   this.currentPlayer = this.player2;
+    // } else if (this.currentPlayer === this.player2) {
+    //   this.currentPlayer = this.player1;
+    // }
   }
 
   addToCenterPile() {
@@ -20,7 +24,7 @@ class Game {
   }
 
   shuffleDeck() {
-
+    // return Math.floor(Math.random() * array.length);
   }
 
   updateWins() {
