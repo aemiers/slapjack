@@ -1,6 +1,7 @@
 /* GENERAL */
 * {
   font-family: 'Roboto', sans-serif;
+  color: white;
 }
 
 html {
@@ -9,10 +10,39 @@ html {
 }
 
 body {
-  background-image: url("assets/wood.jpg");
-  background-position: no-repeat;
+  background-image: url("assets/mountains.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: #007ba7;
 }
 
+/* TYPEFACE */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 15em;
+  font-weight: bolder;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 5em;
+  font-weight: lighter;
+  margin-top: 0;
+  margin-bottom: 8%;
+}
+
+.score {
+  font-size: 3em;
+  margin-left: 5em;
+  margin-top: 1em;
+}
+
+/* CARDS */
 .card-holder {
   display: flex;
   justify-content: space-around;
@@ -20,6 +50,19 @@ body {
 }
 
 .back-card {
-  height: 150px;
-  width: 150px;
+  width: 71%;
+  border-radius: 2em;
+  box-shadow: 5px;
+}
+
+.yellow-shadow {
+  box-shadow: 0 0 50px #ffff00;
+}
+
+.purple-shadow {
+  box-shadow: 0 0 50px #24A0ED;
+}
+
+.green-shadow {
+  box-shadow: 0 0 50px #00FF00;
 }
