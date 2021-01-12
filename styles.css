@@ -33,7 +33,7 @@ h2 {
   font-size: 5em;
   font-weight: lighter;
   margin-top: 0;
-  margin-bottom: 8%;
+  margin-bottom: 3%;
 }
 
 .score {
@@ -55,14 +55,23 @@ h2 {
   box-shadow: 5px;
 }
 
-.yellow-shadow {
-  box-shadow: 0 0 50px #ffff00;
-}
-
 .purple-shadow {
   box-shadow: 0 0 50px #24A0ED;
 }
 
 .green-shadow {
   box-shadow: 0 0 50px #00FF00;
+}
+
+.middle-card-container {
+  position: relative;
+}
+
+.behind-image {
+  transform: rotate(357deg);
+  width: 68%;
+}
+.current-card {
+  position: absolute;
+  left: 5%;
 }
