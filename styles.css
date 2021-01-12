@@ -55,11 +55,11 @@ h2 {
   box-shadow: 5px;
 }
 
-.purple-shadow {
+.p1-shadow {
   box-shadow: 0 0 50px #24A0ED;
 }
 
-.green-shadow {
+.p2-shadow {
   box-shadow: 0 0 50px #00FF00;
 }
 
@@ -71,7 +71,12 @@ h2 {
   transform: rotate(357deg);
   width: 68%;
 }
+
 .current-card {
   position: absolute;
   left: 5%;
+}
+
+.hidden {
+  visibility:hidden;
 }
