@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background-image: url("assets/mountains.jpg");
+  background-image: url("background/mountains.jpg");
   background-size: cover;
   background-position: center;
   background-color: #007ba7;
