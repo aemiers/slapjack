@@ -1,9 +1,13 @@
-var player1 = new Player("player1");
-var player2 = new Player("player2");
-
 class Game {
   constructor() {
     this.currentPlayer = player1;
+    this.centerPile = [];
+  }
+
+  editCardName(cards) {
+    for (var i = 0; i < cards.length; i++) {
+      console.log(cards[i].slice(12));
+    }
   }
 
   getRandomIndex(array) {
@@ -21,8 +25,8 @@ class Game {
   }
 
   dealCards() {
-    player1.hand.push(cards.splice(0, 24));
-    player2.hand.push(cards.splice(0, 24));
+    player1.hand = cards.splice(0, 24);
+    player2.hand = cards.splice(0, 24);
   }
 
   alternateTurns() {
@@ -34,11 +38,15 @@ class Game {
   }
 
   addToCenterPile() {
-
+    this.centerPile.unshift(this.currentPlayer.playCard());
   }
 
   slap() {
-
+    if (this.centerPile[0].includes("jack") || this.centerPile[0] === this.centerPile[1] || this.centerPile[0] === this.centerPile[2]) {
+      this.shuffleDeck(this.centerPile);
+      this.currentPlayer.hand = this.currentPlayer.hand.concat(this.centerPile);
+      this.centerPile = [];
+    }
   }
 
   updateWins() {
@@ -50,6 +58,5 @@ class Game {
   }
 
 }
-
-
-var centerPile = [];
+var player1 = new Player("player1");
+var player2 = new Player("player2");
