@@ -1,10 +1,9 @@
 // A main.js file that instantiates the Game class and also contains all DOM related JavaScript
-// var currentGame = new Game();
+//
+var player1 = new Player("player1");
+var player2 = new Player("player2");
+var game = new Game("player1", "player2", cards);
 
-// eventTarget.addEventListener("keydown", event => {
-//   if (event.isComposing || event.keyCode === 229) {
-//     return;
-//   }
 window.addEventListener("load", gameSetUp());
 document.addEventListener("keydown", function(event) {
   if (event.key === "q" && game.currentPlayer === player1) {
@@ -24,14 +23,12 @@ document.addEventListener("keydown", function(event) {
     // p2 slap
   }
 });
-var game = new Game();
 
+console.log(cards);
+console.log("test")
+// var game = new Game(player1, player2);
 
-function gameSetUp() {
-  game.editCardName(cards);
-  game.shuffleDeck();
-  game.dealCards();
-}
+function
 
 function removeHidden() {
 
