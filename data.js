@@ -1,6 +1,5 @@
 var cards = [
   'assets/blue-01.png',
-  'assets/blue-jack.png',
   'assets/blue-02.png',
   'assets/blue-03.png',
   'assets/blue-04.png',
@@ -10,6 +9,7 @@ var cards = [
   'assets/blue-08.png',
   'assets/blue-09.png',
   'assets/blue-10.png',
+  'assets/blue-jack.png',
   'assets/blue-queen.png',
   'assets/blue-king.png',
   'assets/gold-01.png',

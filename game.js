@@ -37,6 +37,12 @@ class Game {
     }
   }
 
+  finalChance() {
+    if (player1.hand === [] || player2.hand === []) {
+      
+    }
+  }
+
   addToCenterPile() {
     this.centerPile.unshift(this.currentPlayer.playCard());
   }
@@ -46,6 +52,8 @@ class Game {
       this.shuffleDeck(this.centerPile);
       this.currentPlayer.hand = this.currentPlayer.hand.concat(this.centerPile);
       this.centerPile = [];
+    } else {
+
     }
   }
 
