@@ -37,7 +37,12 @@ Slap -
 If a player slaps when neither a Jack, Double, or Sandwich is on top of the central pile, the player who slapped loses the card on top of their hand and it is added to the bottom of their opponent’s hand.
 
 
-How do I know which player is slapping? the specific key that's pressed.
+How do I know which player is slapping? the specific key that's pressed. If f is pressed, it was p1, if j is pressed, it was p2. 
+
+
+Change everything over to find the card object
+Check that it still works in the console.
+
 
 * Create 3 decks on the DOM
 

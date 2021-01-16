@@ -1,35 +1,66 @@
 // A main.js file that instantiates the Game class and also contains all DOM related JavaScript
 //
-var player1 = new Player("player1");
-var player2 = new Player("player2");
-var game = new Game("player1", "player2", cards);
+var centerPile = document.querySelector(".middle-card-container");
+var playedCard = document.querySelector(".current-card")
 
-window.addEventListener("load", gameSetUp());
+
+window.addEventListener("load", onLoad());
 document.addEventListener("keydown", function(event) {
   if (event.key === "q" && game.currentPlayer === player1) {
-    console.log("one");
+    game.addToCenterPile();
     // p1 deal
   }
   else if (event.key === "p" && game.currentPlayer === player2) {
-    console.log("two");
+    game.addToCenterPile();
     // p2 deal a card
   }
   else if (event.key === "f") {
-    console.log("three");
+    whoSlapped("player1", "player2");
+    game.slap();
     // p1 slap
+    //make sure that
   }
   else if (event.key === "j") {
-    console.log("four");
+    whoSlapped("player2", "player1");
+    game.slap();
     // p2 slap
   }
 });
 
-console.log(cards);
-console.log("test")
-// var game = new Game(player1, player2);
+var game;
 
-function
+function loadGame() {
+  game = new Game(cards);
+}
 
-function removeHidden() {
+function resetGame() {
+  game = new Game(cards, game.player1, game.player2)
+}
+
+function addClass(element, style) {
+  element.classList.add(style);
+}
+
+function removeClass(element, style) {
+  element.classList.remove(style);
+}
+
+function changeCenterPileColor() {
+  if (game.currentPlayer === "player1") {
+    removeClass(playedCard, "p2-shadow");
+    addClass(playedCard, "p1-shadow");
+  } else {
+    removeClass(playedCard, "p1-shadow");
+    addClass(playedCard, "p2-shadow");
+  }
+}
+
+function onLoad(){
+  loadGame();
+  removeClass(centerPile, "hidden");
+  console.log(game);
+
+  changeCenterPileColor();
+  game.gameSetUp();
 
 }
