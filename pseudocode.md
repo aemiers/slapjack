@@ -37,7 +37,13 @@ Slap -
 If a player slaps when neither a Jack, Double, or Sandwich is on top of the central pile, the player who slapped loses the card on top of their hand and it is added to the bottom of their opponent’s hand.
 
 
-How do I know which player is slapping? the specific key that's pressed. If f is pressed, it was p1, if j is pressed, it was p2. 
+How do I know which player is slapping? the specific key that's pressed. If f is pressed, it was p1, if j is pressed, it was p2.
+
+on page load - the cards have been shuffled, dealt, new game has been created, both scores are at 0, no card is in the middle.
+
+player1 starts by adding to center pile. Card turns the color of player1, card has been added to the centerPile array. card has been removed from player's card hand array. switches to player2's turn.
+
+How do I show the card color of the past player? When the player clicks the p or q button, that changes the color of the center card.
 
 
 Change everything over to find the card object

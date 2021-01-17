@@ -6,22 +6,22 @@ var playedCard = document.querySelector(".current-card")
 
 window.addEventListener("load", onLoad());
 document.addEventListener("keydown", function(event) {
-  if (event.key === "q" && game.currentPlayer === player1) {
-    game.addToCenterPile();
+  if (event.key === "q" && game.currentPlayer === game.player1) {
+    p1PlayCard();
     // p1 deal
   }
-  else if (event.key === "p" && game.currentPlayer === player2) {
-    game.addToCenterPile();
+  else if (event.key === "p" && game.currentPlayer === game.player2) {
+    p2PlayCard();
     // p2 deal a card
   }
   else if (event.key === "f") {
-    whoSlapped("player1", "player2");
+    game.whoSlapped("player1", "player2");
     game.slap();
     // p1 slap
     //make sure that
   }
   else if (event.key === "j") {
-    whoSlapped("player2", "player1");
+    game.whoSlapped("player2", "player1");
     game.slap();
     // p2 slap
   }
@@ -47,21 +47,30 @@ function removeClass(element, style) {
 
 function onLoad(){
   loadGame();
-  changeCenterPileColor();
   game.gameSetUp();
 }
 
-function changeCenterPileColor() {
-  if (game.currentPlayer === game.player1) {
-    removeClass(playedCard, "p2-shadow");
-    addClass(playedCard, "p1-shadow");
-  } else if (game.currentPlayer === game.player2) {
-    removeClass(playedCard, "p1-shadow");
-    addClass(playedCard, "p2-shadow");
-  }
+function changeCenterPileColor(playedCard, element1, element2) {
+  removeClass(playedCard, element1);
+  addClass(playedCard, element2);
 }
 
 function showCurrentCard() {
+  console.log(game.centerPile[0].imgsrc)
   playedCard.src = game.centerPile[0].imgsrc;
+}
 
+function p1PlayCard() {
+  removeClass(centerPile, "hidden");
+  changeCenterPileColor(playedCard, "p2-shadow", "p1-shadow");
+  game.addToCenterPile();
+  showCurrentCard();
+  game.turnHandler();
+}
+
+function p2PlayCard() {
+  changeCenterPileColor(playedCard, "p1-shadow", "p2-shadow");
+  game.addToCenterPile();
+  showCurrentCard();
+  game.turnHandler();
 }
