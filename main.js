@@ -15,14 +15,11 @@ document.addEventListener("keydown", function(event) {
     // p2 deal a card
   }
   else if (event.key === "f") {
-    game.whoSlapped("player1", "player2");
-    game.slap();
+    p1Slap();
     // p1 slap
-    //make sure that
   }
   else if (event.key === "j") {
-    game.whoSlapped("player2", "player1");
-    game.slap();
+    p2Slap();
     // p2 slap
   }
 });
@@ -69,8 +66,25 @@ function p1PlayCard() {
 }
 
 function p2PlayCard() {
+  removeClass(centerPile, "hidden");
   changeCenterPileColor(playedCard, "p1-shadow", "p2-shadow");
   game.addToCenterPile();
   showCurrentCard();
   game.turnHandler();
+}
+
+function p1Slap() {
+  game.whoSlapped(game.player1, game.player2);
+  game.slap();
+  if (game.centerPile.length === 0) {
+    addClass(centerPile, "hidden");
+  }
+}
+
+function p2Slap() {
+  game.whoSlapped(game.player2, game.player1);
+  game.slap();
+  if (game.centerPile.length === 0) {
+    addClass(centerPile, "hidden");
+  }
 }

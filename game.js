@@ -63,12 +63,14 @@ class Game {
   }
 
   slap() {
-    if (this.centerPile[0].includes("jack") || this.centerPile[0].value === this.centerPile[1].value || this.centerPile[0].value === this.centerPile[2].value) {
+    if (this.centerPile[0].value === 11 || this.centerPile[0].value === this.centerPile[1].value || this.centerPile[0].value === this.centerPile[2].value) {
       this.shuffleDeck(this.centerPile);
       this.slapper.hand = this.slapper.hand.concat(this.centerPile);
       this.centerPile = [];
+      
     } else {
-      this.slapper.playCard();
+      console.log("something went wrong in the slap function")
+      // this.slapper.playCard();
 
     }
   }

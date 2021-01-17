@@ -45,6 +45,13 @@ player1 starts by adding to center pile. Card turns the color of player1, card h
 
 How do I show the card color of the past player? When the player clicks the p or q button, that changes the color of the center card.
 
+Right now, the played card is not going to the centerpile array, but going to the other player's hand?? It must be the slap function that's going awry
+
+When a player slaps, need to hide center pile again.
+Also add removeClass to p2 plays
+After a player slaps, it's the other player's turn.
+
+
 
 Change everything over to find the card object
 Check that it still works in the console.
