@@ -45,22 +45,23 @@ function removeClass(element, style) {
   element.classList.remove(style);
 }
 
+function onLoad(){
+  loadGame();
+  changeCenterPileColor();
+  game.gameSetUp();
+}
+
 function changeCenterPileColor() {
-  if (game.currentPlayer === "player1") {
+  if (game.currentPlayer === game.player1) {
     removeClass(playedCard, "p2-shadow");
     addClass(playedCard, "p1-shadow");
-  } else {
+  } else if (game.currentPlayer === game.player2) {
     removeClass(playedCard, "p1-shadow");
     addClass(playedCard, "p2-shadow");
   }
 }
 
-function onLoad(){
-  loadGame();
-  removeClass(centerPile, "hidden");
-  console.log(game);
-
-  changeCenterPileColor();
-  game.gameSetUp();
+function showCurrentCard() {
+  playedCard.src = game.centerPile[0].imgsrc;
 
 }
