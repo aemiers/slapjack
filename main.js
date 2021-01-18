@@ -3,6 +3,8 @@
 var centerPile = document.querySelector(".middle-card-container");
 var playedCard = document.querySelector(".current-card");
 var subheader = document.querySelector(".subheader");
+var p1Score = document.querySelector(".player-one-score");
+var p2Score = document.querySelector(".player-two-score");
 
 window.addEventListener("load", onLoad());
 document.addEventListener("keydown", function(event) {
@@ -63,6 +65,7 @@ function p1PlayCard() {
   game.addToCenterPile();
   showCurrentCard();
   game.turnHandler();
+
 }
 
 function p2PlayCard() {
@@ -79,9 +82,9 @@ function p1Slap() {
   game.slap();
   if (game.centerPile.length === 0) {
     addClass(centerPile, "hidden");
-    updateSubheaderWin();
+    updateSubheaderSlapWin();
   } else if (game.centerPile.length >= 1) {
-    updateSubheaderLose();
+    updateSubheaderLoseCard();
   }
 }
 
@@ -90,16 +93,23 @@ function p2Slap() {
   game.slap();
   if (game.centerPile.length === 0) {
     addClass(centerPile, "hidden");
-    updateSubheaderWin();
+    updateSubheaderSlapWin();
   } else if (game.centerPile.length >= 1) {
     updateSubheaderLoseCard();
   }
 }
 
-function updateSubheaderWin() {
+function updateSubheaderSlapWin() {
+  removeClass(subheader, "hidden");
   subheader.innerText = `${game.gameMessage} ${game.slapper.id} takes the pile!`;
 }
 
 function updateSubheaderLoseCard() {
+  removeClass(subheader, "hidden");
   subheader.innerText = `${game.gameMessage} ${game.slapper.id} loses a card!`;
+}
+
+function updateSubheaderGameWin() {
+  removeClass(subheader, "hidden");
+  subheader.innerText = `${game.slapper.id} wins the game!`;
 }
