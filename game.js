@@ -1,12 +1,13 @@
 class Game {
   constructor(cards, player1, player2) {
-    this.player1 = player1 || new Player("player1");
-    this.player2 = player2 || new Player("player2");
+    this.player1 = player1 || new Player("Player 1");
+    this.player2 = player2 || new Player("Player 2");
     this.currentPlayer = this.player1;
     this.centerPile = [];
     this.cards = cards;
     this.slapper = this.player1;
     this.unslapper = this.player2;
+    this.gameMessage = "SLAPJACK!";
   }
 
   getRandomIndex(array) {
@@ -62,16 +63,41 @@ class Game {
     this.unslapper = unslapper;
   }
 
-  slap() {
-    if (this.centerPile[0].value === 11 || this.centerPile[0].value === this.centerPile[1].value || this.centerPile[0].value === this.centerPile[2].value) {
-      this.shuffleDeck(this.centerPile);
-      this.slapper.hand = this.slapper.hand.concat(this.centerPile);
-      this.centerPile = [];
-      
-    } else {
-      console.log("something went wrong in the slap function")
-      // this.slapper.playCard();
+  addCenterPileToSlapper() {
+    this.slapper.hand = this.slapper.hand.concat(this.centerPile);
+  }
 
+  resetCenterPile() {
+    this.centerPile = [];
+  }
+
+  slapWinScenario() {
+    this.shuffleDeck(this.centerPile);
+    this.addCenterPileToSlapper();
+    this.resetCenterPile();
+    this.currentPlayer = this.unslapper;
+  }
+
+  slapPunishment() {
+    this.unslapper.hand.push(this.slapper.playCard());
+  }
+
+  slap() {
+    if (this.centerPile[0].value === 11) {
+      this.slapWinScenario();
+      this.gameMessage = "SLAPJACK!";
+    } else if (this.centerPile.length > 1 && this.centerPile[0].value === this.centerPile[1].value) {
+      this.slapWinScenario();
+      this.gameMessage = "DOUBLE!!";
+    } else if (this.centerPile.length > 1 && this.centerPile[0].value === this.centerPile[2].value) {
+      this.slapWinScenario();
+      this.gameMessage = "SLAPJACK!";
+    } else if (this.centerPile.length <= 1 && this.centerPile[0].value !== 11) {
+      this.slapPunishment();
+      this.gameMessage = "YOU CAN'T DO THAT!";
+    } else {
+      this.slapPunishment();
+      this.gameMessage = "YOU CAN'T DO THAT!";
     }
   }
 
@@ -87,5 +113,4 @@ class Game {
   resetDeck() {
 // newgame
   }
-
 }

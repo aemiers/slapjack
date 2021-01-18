@@ -18,7 +18,7 @@ addToCenterPile
   add player's color to the center pile
 
 Slap -
-  jack, doubles, sandwiches- all cards in centerPile are suffled and  added to that player's hand
+  jack, doubles, sandwiches- all cards in centerPile are shuffled and  added to that player's hand
   center pile is an empty array again
   deal goes to next player
   or if ()
@@ -51,6 +51,7 @@ When a player slaps, need to hide center pile again.
 Also add removeClass to p2 plays
 After a player slaps, it's the other player's turn.
 
+deactivate slap buttons?
 
 
 Change everything over to find the card object

@@ -1,8 +1,8 @@
 // A main.js file that instantiates the Game class and also contains all DOM related JavaScript
 //
 var centerPile = document.querySelector(".middle-card-container");
-var playedCard = document.querySelector(".current-card")
-
+var playedCard = document.querySelector(".current-card");
+var subheader = document.querySelector(".subheader");
 
 window.addEventListener("load", onLoad());
 document.addEventListener("keydown", function(event) {
@@ -53,12 +53,12 @@ function changeCenterPileColor(playedCard, element1, element2) {
 }
 
 function showCurrentCard() {
-  console.log(game.centerPile[0].imgsrc)
   playedCard.src = game.centerPile[0].imgsrc;
 }
 
 function p1PlayCard() {
   removeClass(centerPile, "hidden");
+  addClass(subheader, "hidden");
   changeCenterPileColor(playedCard, "p2-shadow", "p1-shadow");
   game.addToCenterPile();
   showCurrentCard();
@@ -67,6 +67,7 @@ function p1PlayCard() {
 
 function p2PlayCard() {
   removeClass(centerPile, "hidden");
+  addClass(subheader, "hidden");
   changeCenterPileColor(playedCard, "p1-shadow", "p2-shadow");
   game.addToCenterPile();
   showCurrentCard();
@@ -78,6 +79,9 @@ function p1Slap() {
   game.slap();
   if (game.centerPile.length === 0) {
     addClass(centerPile, "hidden");
+    updateSubheaderWin();
+  } else if (game.centerPile.length >= 1) {
+    updateSubheaderLose();
   }
 }
 
@@ -86,5 +90,16 @@ function p2Slap() {
   game.slap();
   if (game.centerPile.length === 0) {
     addClass(centerPile, "hidden");
+    updateSubheaderWin();
+  } else if (game.centerPile.length >= 1) {
+    updateSubheaderLoseCard();
   }
+}
+
+function updateSubheaderWin() {
+  subheader.innerText = `${game.gameMessage} ${game.slapper.id} takes the pile!`;
+}
+
+function updateSubheaderLoseCard() {
+  subheader.innerText = `${game.gameMessage} ${game.slapper.id} loses a card!`;
 }
