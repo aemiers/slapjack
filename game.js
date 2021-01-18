@@ -1,45 +1,56 @@
 class Game {
-  constructor() {
-    this.currentPlayer = player1;
+  constructor(cards, player1, player2) {
+    this.player1 = player1 || new Player("Player 1");
+    this.player2 = player2 || new Player("Player 2");
+    this.currentPlayer = this.player1;
     this.centerPile = [];
-  }
-
-  editCardName(cards) {
-    for (var i = 0; i < cards.length; i++) {
-      console.log(cards[i].slice(12));
-    }
+    this.cards = cards;
+    this.slapper = this.player1;
+    this.unslapper = this.player2;
+    this.gameMessage = "SLAPJACK!";
   }
 
   getRandomIndex(array) {
     return Math.floor(Math.random() * array.length);
   }
 
-  shuffleDeck(cards) {
-    for (var i = cards.length - 1; i >= 0; i--) {
-      var randomNumber = this.getRandomIndex(cards);
-      var cardAtIndex = cards[randomNumber];
-      cards[randomNumber] = cards[i];
-      cards[i] = cardAtIndex;
+  shuffleDeck() {
+    for (var i = this.cards.length - 1; i >= 0; i--) {
+      var randomNumber = this.getRandomIndex(this.cards);
+      var cardAtIndex = this.cards[randomNumber];
+      this.cards[randomNumber] = this.cards[i];
+      this.cards[i] = cardAtIndex;
     }
-      return cards;
+      return this.cards;
   }
 
   dealCards() {
-    player1.hand = cards.splice(0, 24);
-    player2.hand = cards.splice(0, 24);
+    this.player1.hand = this.cards.splice(0, 26);
+    this.player2.hand = this.cards.splice(0, 26);
+  }
+
+  turnHandler() {
+    if (this.player1.hand !== [] && this.player2.hand !== []) {
+      this.alternateTurns();
+    } else if (this.player1.hand === [] || this.player2.hand === []) {
+      this.finalChance();
+    }
   }
 
   alternateTurns() {
-    if (this.currentPlayer === player1) {
-      this.currentPlayer = player2;
+    if (this.currentPlayer === this.player1) {
+      this.currentPlayer = this.player2;
     } else {
-      this.currentPlayer = player1;
+      this.currentPlayer = this.player1;
     }
   }
 
   finalChance() {
-    if (player1.hand === [] || player2.hand === []) {
-      
+    // this.currentPlayer = currentPlayer;
+    if (this.player1.hand === []) {
+      this.currentPlayer = this.player2;
+    } else if (this.player2.hand === []){
+      this.currentPlayer = this.player1;
     }
   }
 
@@ -47,14 +58,52 @@ class Game {
     this.centerPile.unshift(this.currentPlayer.playCard());
   }
 
-  slap() {
-    if (this.centerPile[0].includes("jack") || this.centerPile[0] === this.centerPile[1] || this.centerPile[0] === this.centerPile[2]) {
-      this.shuffleDeck(this.centerPile);
-      this.currentPlayer.hand = this.currentPlayer.hand.concat(this.centerPile);
-      this.centerPile = [];
-    } else {
+  whoSlapped(slapper, unslapper) {
+    this.slapper = slapper;
+    this.unslapper = unslapper;
+  }
 
+  addCenterPileToSlapper() {
+    this.slapper.hand = this.slapper.hand.concat(this.centerPile);
+  }
+
+  resetCenterPile() {
+    this.centerPile = [];
+  }
+
+  slapWinScenario() {
+    this.shuffleDeck(this.centerPile);
+    this.addCenterPileToSlapper();
+    this.resetCenterPile();
+    this.currentPlayer = this.unslapper;
+  }
+
+  slapPunishment() {
+    this.unslapper.hand.push(this.slapper.playCard());
+  }
+
+  slap() {
+    if (this.centerPile[0].value === 11) {
+      this.slapWinScenario();
+      this.gameMessage = "SLAPJACK!";
+    } else if (this.centerPile.length > 1 && this.centerPile[0].value === this.centerPile[1].value) {
+      this.slapWinScenario();
+      this.gameMessage = "DOUBLE!!";
+    } else if (this.centerPile.length > 1 && this.centerPile[0].value === this.centerPile[2].value) {
+      this.slapWinScenario();
+      this.gameMessage = "SLAPJACK!";
+    } else if (this.centerPile.length <= 1 && this.centerPile[0].value !== 11) {
+      this.slapPunishment();
+      this.gameMessage = "YOU CAN'T DO THAT!";
+    } else {
+      this.slapPunishment();
+      this.gameMessage = "YOU CAN'T DO THAT!";
     }
+  }
+
+  gameSetUp() {
+    this.shuffleDeck();
+    this.dealCards();
   }
 
   updateWins() {
@@ -64,7 +113,4 @@ class Game {
   resetDeck() {
 // newgame
   }
-
 }
-var player1 = new Player("player1");
-var player2 = new Player("player2");
