@@ -53,9 +53,25 @@ After a player slaps, it's the other player's turn.
 
 deactivate slap buttons?
 
-
 Change everything over to find the card object
 Check that it still works in the console.
+
+Order on normal gameplay-
+  key is pressed to deal card
+  centerpile is now visible
+  subheader is hidden
+  pile color is changed
+  card is removed from player array and added to center pile
+  centerPile array [0] is now visible on screen
+  turn to the next person
+
+Order on suddenDeath -
+  key is pressed to deal card
+  if a player has an empty array, sudden death is triggered
+  pile color will always be that of the currentPlayer
+  card is removed from currentPlayer's array and added to center
+  centerPile array [0] is now visible on screen
+
 
 
 * Create 3 decks on the DOM

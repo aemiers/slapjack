@@ -8,6 +8,12 @@ class Game {
     this.slapper = this.player1;
     this.unslapper = this.player2;
     this.gameMessage = "SLAPJACK!";
+    this.won = false;
+  }
+
+  gameSetUp() {
+    this.shuffleDeck();
+    this.dealCards();
   }
 
   getRandomIndex(array) {
@@ -33,7 +39,7 @@ class Game {
     if (this.player1.hand !== [] && this.player2.hand !== []) {
       this.alternateTurns();
     } else if (this.player1.hand === [] || this.player2.hand === []) {
-      this.finalChance();
+      this.suddenDeath();
     }
   }
 
@@ -45,7 +51,7 @@ class Game {
     }
   }
 
-  finalChance() {
+  suddenDeath() {
     // this.currentPlayer = currentPlayer;
     if (this.player1.hand === []) {
       this.currentPlayer = this.player2;
@@ -101,13 +107,8 @@ class Game {
     }
   }
 
-  gameSetUp() {
-    this.shuffleDeck();
-    this.dealCards();
-  }
-
   updateWins() {
-
+    this.won = true;
   }
 
   resetDeck() {
