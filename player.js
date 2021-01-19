@@ -11,7 +11,7 @@ class Player {
   }
 
   saveWinsToStorage() {
-    // var stringifiedWins = JSON.stringify(wins);
-    // localStorage.setItem('totalWins', stringifiedWins);
+    var stringifiedWins = JSON.stringify(this.wins);
+    localStorage.setItem('totalWins', stringifiedWins);
   }
 }

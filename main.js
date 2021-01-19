@@ -1,3 +1,4 @@
+// QUERY SELECTORS
 var centerPile = document.querySelector(".middle-card-container");
 var p1Stack = document.querySelector(".p1-card-stack")
 var p2Stack = document.querySelector(".p2-card-stack")
@@ -6,6 +7,7 @@ var subheader = document.querySelector(".subheader");
 var p1Score = document.querySelector(".player-one-score");
 var p2Score = document.querySelector(".player-two-score");
 
+// EVENT LISTENERS
 window.addEventListener("load", onLoad());
 document.addEventListener("keydown", function(event) {
   if (event.key === "q" && game.currentPlayer === game.player1) {
@@ -23,8 +25,10 @@ document.addEventListener("keydown", function(event) {
   }
 });
 
+// GLOBAL VARIABLES
 var game;
 
+// DOM FUNCTIONS
 function loadGame() {
   game = new Game(cards);
 }
@@ -123,10 +127,18 @@ function slapOutcome() {
 function suddenDeathOutcome() {
   if (game.won === true) {
     updateSubheader();
-    updateScore(game.winner.wins, game.slapper.id);
+    updateScore();
   } else if (game.won === false) {
     updateSubheader();
     playerPileVisibility();
+  }
+}
+
+function updateScore() {
+  if (game.winner === game.player1) {
+    p1Score.innerText = `${player1.wins} Wins`;
+  } else if (game.winner === game.player2) {
+    p2Score.innerText = `${player2.wins} Wins`;
   }
 }
 
@@ -140,9 +152,7 @@ function updateSubheader() {
     subheader.innerText = `${game.gameMessage} ${game.winner.id} wins the game!`;
   } else if (game.won === false && game.centerPile[0].value === 11 && game.slapper !== game.currentPlayer) {
     subheader.innerText = `${game.gameMessage}`;
+  } else if (game.player1.hand.length === 0 && game.player2.hand.length === 0) {
+    subheader.innerText = `${game.gameMessage}`;
   }
-}
-
-function updateScore(scoreName, winnerName) {
-  scoreName.innerText = `winnerName Wins`;
 }

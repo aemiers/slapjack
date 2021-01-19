@@ -134,6 +134,8 @@ class Game {
       console.log("game 136");
       this.winner = this.unslapper;
       this.gameWin();
+    } else if (this.player1.hand.length === 0 & this.player2.hand.length === 0) {
+      draw();
     }
   }
 
@@ -142,6 +144,7 @@ class Game {
     this.won = true;
     this.gameMessage = "WE HAVE A WINNER!";
     this.updateWins();
+    this.winner.saveWinsToStorage();
   }
 
   updateWins() {
@@ -153,8 +156,6 @@ class Game {
   }
 
   draw() {
-    if (this.player1.hand.length === 0 & this.player2.hand.length === 0) {
-      this.gameMessage = "Draw!";
-    }
+    this.gameMessage = "Draw!";
   }
 }
