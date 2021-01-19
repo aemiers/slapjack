@@ -11,38 +11,55 @@ var p2Score = document.querySelector(".player-two-score");
 window.addEventListener("load", onLoad());
 document.addEventListener("keydown", function(event) {
   if (event.key === "q" && game.currentPlayer === game.player1) {
-    console.log("main 14")
     playCard(game.player1);
-  }
-  else if (event.key === "p" && game.currentPlayer === game.player2) {
+  } else if (event.key === "p" && game.currentPlayer === game.player2) {
     playCard(game.player2);
-  }
-  else if (event.key === "f") {
+  } else if (event.key === "f") {
     playerSlapped(game.player1, game.player2);
-  }
-  else if (event.key === "j") {
+  } else if (event.key === "j") {
     playerSlapped(game.player2, game.player1);
-  }
-  else if (event.key === "Enter") {
+  } else if (event.key === "Enter") {
     location.reload();
   }
 });
-
 // ~~~~~~~~~~~~~~~~~ GLOBAL VARIABLES ~~~~~~~~~~~~~~~~~
 var game;
 
-// DOM FUNCTIONS
+//  ~~~~~~~~~~~~~~~~~ DOM FUNCTIONS ~~~~~~~~~~~~~~~~~
 function loadGame() {
   game = new Game(cards);
-}
-
-function resetGame() {
-  game = new Game(cards, game.player1, game.player2)
 }
 
 function onLoad(){
   loadGame();
   game.gameSetUp();
+  displayWinsPlayer1();
+  displayWinsPlayer2();
+}
+
+// Kayla, please see foot note at bottom of this page for following function question
+
+function displayWinsPlayer1() {
+  var retrievedData = JSON.parse(localStorage.getItem("Player 1 wins"));
+  if (retrievedData) {
+    var parsedArray = JSON.parse(retrievedData);
+    game.player1.wins = parsedArray;
+    displayScoreLocalStorage();
+  }
+}
+
+function displayWinsPlayer2() {
+  var retrievedData = JSON.parse(localStorage.getItem("Player 2 wins"));
+  if (retrievedData) {
+    var parsedArray = JSON.parse(retrievedData);
+    game.player2.wins = parsedArray;
+    displayScoreLocalStorage();
+  }
+}
+
+function displayScoreLocalStorage() {
+  p1Score.innerText = `${game.player1.wins} Wins`;
+  p2Score.innerText = `${game.player2.wins} Wins`;
 }
 
 function addClass(element, style) {
@@ -78,7 +95,6 @@ function playerPileVisibility() {
   } else if (game.player2.hand.length === 0) {
     addClass(p2Stack, "hidden");
     game.activateSuddenDeath();
-  // } else if (game.)
   } else {
     removeClass(p1Stack, "hidden");
     removeClass(p2Stack, "hidden");
@@ -88,7 +104,6 @@ function playerPileVisibility() {
 function showCurrentCard() {
   if (game.centerPile.length === 52) {
     draw();
-    console.log("main 91")
   } else {
     playedCard.src = game.centerPile[0].imgsrc;
   }
@@ -96,7 +111,6 @@ function showCurrentCard() {
 
 function gamePlay() {
   addClass(subheader, "hidden");
-  console.log("main 95")
   game.addToCenterPile();
   centerPileVisibility();
   centerPileColor();
@@ -159,15 +173,13 @@ function updateSubheader() {
   } else if (game.centerPile.length >= 1 && game.won === false & game.gameMessage !== "Draw!") {
     subheader.innerText = `${game.gameMessage} ${game.slapper.id} loses a card!`;
   } else if (game.won === true) {
-    subheader.innerText = `${game.gameMessage} ${game.winner.id} wins the game!`;
+    subheader.innerText = `${game.gameMessage} ${game.winner.id} wins the game! To start a new game, press ENTER.`;
   } else if (game.won === false && game.centerPile[0].value === 11 && game.slapper !== game.currentPlayer) {
     subheader.innerText = `${game.gameMessage}`;
   } else if (game.player1.hand.length === 0 && game.player2.hand.length === 0 && game.gameMessage !== "Draw!") {
-    console.log("main 166")
     subheader.innerText = `${game.gameMessage}`;
   } else if (game.gameMessage === "Draw!") {
     subheader.innerText = `${game.gameMessage} To start a new game, press ENTER.`;
-    console.log("168 main")
   }
 }
 
@@ -176,9 +188,21 @@ function draw() {
   addClass(p1Stack, "hidden");
   addClass(p2Stack, "hidden");
   updateSubheader();
-  console.log("main 177")
 }
 
-function newGame() {
 
-}
+
+
+//Footnote question - I tried to refactor the wet displayWinsPlayer1 and displayWinsPlayer2 functions, but it didn't like me passing game.player1.wins as an argument. I tried a myriad of approaches, but nothing worked. Could you help me understand as to why it doesn't like dot notation as an argument?
+
+// displayWins("Player 1 wins", game.player1.wins);
+// displayWins("Player 2 wins", game.player2.wins);
+//
+// function displayWins(item, gameLocation) {
+//   var retrievedData = JSON.parse(localStorage.getItem(item));
+//   if (retrievedData) {
+//     var parsedArray = JSON.parse(retrievedData);
+//     gameLocation = parsedArray;
+//     displayScoreLocalStorage();
+//   }
+// }
