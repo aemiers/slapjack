@@ -11,7 +11,6 @@ var p2Score = document.querySelector(".player-two-score");
 window.addEventListener("load", onLoad());
 document.addEventListener("keydown", function(event) {
   if (event.key === "q" && game.currentPlayer === game.player1) {
-    console.log("main 14")
     playCard(game.player1);
   }
   else if (event.key === "p" && game.currentPlayer === game.player2) {
@@ -78,7 +77,6 @@ function playerPileVisibility() {
   } else if (game.player2.hand.length === 0) {
     addClass(p2Stack, "hidden");
     game.activateSuddenDeath();
-  // } else if (game.)
   } else {
     removeClass(p1Stack, "hidden");
     removeClass(p2Stack, "hidden");
@@ -88,7 +86,6 @@ function playerPileVisibility() {
 function showCurrentCard() {
   if (game.centerPile.length === 52) {
     draw();
-    console.log("main 91")
   } else {
     playedCard.src = game.centerPile[0].imgsrc;
   }
@@ -96,7 +93,6 @@ function showCurrentCard() {
 
 function gamePlay() {
   addClass(subheader, "hidden");
-  console.log("main 95")
   game.addToCenterPile();
   centerPileVisibility();
   centerPileColor();
@@ -159,15 +155,13 @@ function updateSubheader() {
   } else if (game.centerPile.length >= 1 && game.won === false & game.gameMessage !== "Draw!") {
     subheader.innerText = `${game.gameMessage} ${game.slapper.id} loses a card!`;
   } else if (game.won === true) {
-    subheader.innerText = `${game.gameMessage} ${game.winner.id} wins the game!`;
+    subheader.innerText = `${game.gameMessage} ${game.winner.id} wins the game! To start a new game, press ENTER.`;
   } else if (game.won === false && game.centerPile[0].value === 11 && game.slapper !== game.currentPlayer) {
     subheader.innerText = `${game.gameMessage}`;
   } else if (game.player1.hand.length === 0 && game.player2.hand.length === 0 && game.gameMessage !== "Draw!") {
-    console.log("main 166")
     subheader.innerText = `${game.gameMessage}`;
   } else if (game.gameMessage === "Draw!") {
     subheader.innerText = `${game.gameMessage} To start a new game, press ENTER.`;
-    console.log("168 main")
   }
 }
 
@@ -176,7 +170,6 @@ function draw() {
   addClass(p1Stack, "hidden");
   addClass(p2Stack, "hidden");
   updateSubheader();
-  console.log("main 177")
 }
 
 function newGame() {

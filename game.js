@@ -43,18 +43,15 @@ class Game {
     } else if (this.player1.hand === []) {
       this.currentPlayer = this.player2;
       this.suddenDeath = true;
-      console.log("game 45")
     } else if (this.player2.hand === []) {
       this.currentPlayer = this.player1;
       this.suddenDeath = true;
-      console.log("game 49")
     }
   }
 
   alternateTurns() {
     if (this.currentPlayer === this.player1) {
       this.currentPlayer = this.player2;
-      console.log("player 2's turn game 67")
     } else {
       this.currentPlayer = this.player1;
     }
@@ -62,14 +59,11 @@ class Game {
 
   addToCenterPile() {
     this.centerPile.unshift(this.currentPlayer.playCard());
-    console.log(this.centerPile);
-    console.log(this.player1.hand);
   }
 
   whoSlapped(hare, tortoise) {
     this.slapper = hare;
     this.unslapper = tortoise;
-    console.log("who slapped function")
   }
 
   addCenterPileToSlapper() {
@@ -111,27 +105,22 @@ class Game {
   }
 
   activateSuddenDeath() {
-    console.log("suddendeath activated")
     this.suddenDeath = true;
   }
 
   suddenDeathSlap() {
     if (this.centerPile[0].value === 11 && this.slapper === this.currentPlayer) {
-      console.log("game 123")
       this.winner = this.slapper;
       this.gameWin();
     } else if (this.centerPile[0].value !== 11 && this.slapper === this.currentPlayer) {
-      console.log("game 126")
       this.gameMessage = "FALSE SLAP! Penalty card to other player!"
       this.suddenDeath = false;
       this.slapPunishment();
     } else if (this.centerPile[0].value === 11 && this.slapper !== this.currentPlayer) {
-      console.log("game 131")
       this.gameMessage = "Back in the game!";
       this.suddenDeath = false;
       this.slapWinScenario();
     } else if (this.centerPile[0].value !== 11 && this.slapper !== this.currentPlayer) {
-      console.log("game 136");
       this.winner = this.unslapper;
       this.gameWin();
     }
@@ -139,7 +128,6 @@ class Game {
 
 
   gameWin(){
-    console.log("128");
     this.won = true;
     this.gameMessage = "WE HAVE A WINNER!";
     this.updateWins();
@@ -152,7 +140,7 @@ class Game {
 
   resetDeck() {
     if (this.won === true || this.gameMessage === "Draw!") {
-      
+
     }
   }
 }
