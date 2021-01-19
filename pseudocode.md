@@ -73,6 +73,10 @@ Order on suddenDeath -
   centerPile array [0] is now visible on screen
 
 
+Why is it pulling from the player 2 hand when player 1 has no cards?
+  Prevent the key from firing when the array is empty
+
+Sudden death game state is true when one player has empty array as a hand
 
 * Create 3 decks on the DOM
 

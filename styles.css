@@ -1,4 +1,4 @@
-/* GENERAL */
+/*  ~~~~~~~~~~~~~~~~~ GENERAL  ~~~~~~~~~~~~~~~~~ */
 * {
   font-family: 'Roboto', sans-serif;
   color: white;
@@ -16,7 +16,7 @@ body {
   background-color: #007ba7;
 }
 
-/* TYPEFACE */
+/*  ~~~~~~~~~~~~~~~~~ TYPEFACE  ~~~~~~~~~~~~~~~~~ */
 header {
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@ h2 {
   margin-top: 1em;
 }
 
-/* CARDS */
+/*  ~~~~~~~~~~~~~~~~~ CARDS  ~~~~~~~~~~~~~~~~~ */
 .card-holder {
   display: flex;
   justify-content: space-around;
