@@ -1,4 +1,4 @@
-// QUERY SELECTORS
+//  ~~~~~~~~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~~~~~~~~
 var centerPile = document.querySelector(".middle-card-container");
 var p1Stack = document.querySelector(".p1-card-stack")
 var p2Stack = document.querySelector(".p2-card-stack")
@@ -7,7 +7,7 @@ var subheader = document.querySelector(".subheader");
 var p1Score = document.querySelector(".player-one-score");
 var p2Score = document.querySelector(".player-two-score");
 
-// EVENT LISTENERS
+//  ~~~~~~~~~~~~~~~~~ EVENT LISTENERS ~~~~~~~~~~~~~~~~~
 window.addEventListener("load", onLoad());
 document.addEventListener("keydown", function(event) {
   if (event.key === "q" && game.currentPlayer === game.player1) {
@@ -25,7 +25,7 @@ document.addEventListener("keydown", function(event) {
   }
 });
 
-// GLOBAL VARIABLES
+// ~~~~~~~~~~~~~~~~~ GLOBAL VARIABLES ~~~~~~~~~~~~~~~~~
 var game;
 
 // DOM FUNCTIONS
@@ -75,6 +75,7 @@ function playerPileVisibility() {
   } else if (game.player2.hand.length === 0) {
     addClass(p2Stack, "hidden");
     game.activateSuddenDeath();
+  // } else if (game.)
   } else {
     removeClass(p1Stack, "hidden");
     removeClass(p2Stack, "hidden");
@@ -82,11 +83,16 @@ function playerPileVisibility() {
 }
 
 function showCurrentCard() {
-  playedCard.src = game.centerPile[0].imgsrc;
+  if (game.centerPile.length === 52) {
+    draw();
+  } else {
+    playedCard.src = game.centerPile[0].imgsrc;
+  }
 }
 
 function gamePlay() {
   addClass(subheader, "hidden");
+  console.log("main 95")
   game.addToCenterPile();
   centerPileVisibility();
   centerPileColor();
@@ -136,9 +142,9 @@ function suddenDeathOutcome() {
 
 function updateScore() {
   if (game.winner === game.player1) {
-    p1Score.innerText = `${player1.wins} Wins`;
+    p1Score.innerText = `${game.player1.wins} Wins`;
   } else if (game.winner === game.player2) {
-    p2Score.innerText = `${player2.wins} Wins`;
+    p2Score.innerText = `${game.player2.wins} Wins`;
   }
 }
 
@@ -146,7 +152,7 @@ function updateSubheader() {
   removeClass(subheader, "hidden");
   if (game.centerPile.length === 0) {
     subheader.innerText = `${game.gameMessage} ${game.slapper.id} takes the pile!`;
-  } else if (game.centerPile.length >= 1 && game.won === false) {
+  } else if (game.centerPile.length >= 1 && game.won === false & game.gameMessage !== "Draw!") {
     subheader.innerText = `${game.gameMessage} ${game.slapper.id} loses a card!`;
   } else if (game.won === true) {
     subheader.innerText = `${game.gameMessage} ${game.winner.id} wins the game!`;
@@ -154,5 +160,14 @@ function updateSubheader() {
     subheader.innerText = `${game.gameMessage}`;
   } else if (game.player1.hand.length === 0 && game.player2.hand.length === 0) {
     subheader.innerText = `${game.gameMessage}`;
+  } else if (game.gameMessage === "Draw!") {
+    subheader.innerText = `${game.gameMessage}`;
   }
+}
+
+function draw() {
+  game.gameMessage = "Draw!";
+  addClass(p1Stack, "hidden");
+  addClass(p2Stack, "hidden");
+  updateSubheader();
 }

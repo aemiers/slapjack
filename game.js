@@ -134,10 +134,9 @@ class Game {
       console.log("game 136");
       this.winner = this.unslapper;
       this.gameWin();
-    } else if (this.player1.hand.length === 0 & this.player2.hand.length === 0) {
-      draw();
     }
   }
+
 
   gameWin(){
     console.log("128");
@@ -153,9 +152,5 @@ class Game {
 
   resetDeck() {
 // newgame
-  }
-
-  draw() {
-    this.gameMessage = "Draw!";
   }
 }
