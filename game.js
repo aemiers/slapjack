@@ -126,7 +126,6 @@ class Game {
     }
   }
 
-
   gameWin(){
     this.won = true;
     this.gameMessage = "WE HAVE A WINNER!";
@@ -136,11 +135,5 @@ class Game {
 
   updateWins() {
     this.winner.wins += 1;
-  }
-
-  resetDeck() {
-    if (this.won === true || this.gameMessage === "Draw!") {
-
-    }
   }
 }

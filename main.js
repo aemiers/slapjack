@@ -12,36 +12,66 @@ window.addEventListener("load", onLoad());
 document.addEventListener("keydown", function(event) {
   if (event.key === "q" && game.currentPlayer === game.player1) {
     playCard(game.player1);
-  }
-  else if (event.key === "p" && game.currentPlayer === game.player2) {
+  } else if (event.key === "p" && game.currentPlayer === game.player2) {
     playCard(game.player2);
-  }
-  else if (event.key === "f") {
+  } else if (event.key === "f") {
     playerSlapped(game.player1, game.player2);
-  }
-  else if (event.key === "j") {
+  } else if (event.key === "j") {
     playerSlapped(game.player2, game.player1);
-  }
-  else if (event.key === "Enter") {
+  } else if (event.key === "Enter") {
     location.reload();
   }
 });
-
 // ~~~~~~~~~~~~~~~~~ GLOBAL VARIABLES ~~~~~~~~~~~~~~~~~
 var game;
 
-// DOM FUNCTIONS
+//  ~~~~~~~~~~~~~~~~~ DOM FUNCTIONS ~~~~~~~~~~~~~~~~~
 function loadGame() {
   game = new Game(cards);
-}
-
-function resetGame() {
-  game = new Game(cards, game.player1, game.player2)
 }
 
 function onLoad(){
   loadGame();
   game.gameSetUp();
+  displayWinsPlayer1();
+  displayWinsPlayer2();
+}
+
+// function displayScore() {
+//   displayWins("Player 1 wins", game.player1.wins);
+//   displayWins("Player 2 wins", game.player2.wins);
+// }
+
+// function displayWins(item, gameLocation) {
+//   var retrievedData = JSON.parse(localStorage.getItem(item));
+//   if (retrievedData) {
+//     var parsedArray = JSON.parse(retrievedData);
+//     gameLocation = parsedArray;
+//     displayScoreLocalStorage();
+//   }
+// }
+
+function displayWinsPlayer1() {
+  var retrievedData = JSON.parse(localStorage.getItem("Player 1 wins"));
+  if (retrievedData) {
+    var parsedArray = JSON.parse(retrievedData);
+    game.player1.wins = parsedArray;
+    displayScoreLocalStorage();
+  }
+}
+
+function displayWinsPlayer2() {
+  var retrievedData = JSON.parse(localStorage.getItem("Player 2 wins"));
+  if (retrievedData) {
+    var parsedArray = JSON.parse(retrievedData);
+    game.player2.wins = parsedArray;
+    displayScoreLocalStorage();
+  }
+}
+
+function displayScoreLocalStorage() {
+  p1Score.innerText = `${game.player1.wins} Wins`;
+  p2Score.innerText = `${game.player2.wins} Wins`;
 }
 
 function addClass(element, style) {
@@ -170,8 +200,4 @@ function draw() {
   addClass(p1Stack, "hidden");
   addClass(p2Stack, "hidden");
   updateSubheader();
-}
-
-function newGame() {
-
 }
