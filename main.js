@@ -37,20 +37,6 @@ function onLoad(){
   displayWinsPlayer2();
 }
 
-// function displayScore() {
-//   displayWins("Player 1 wins", game.player1.wins);
-//   displayWins("Player 2 wins", game.player2.wins);
-// }
-
-// function displayWins(item, gameLocation) {
-//   var retrievedData = JSON.parse(localStorage.getItem(item));
-//   if (retrievedData) {
-//     var parsedArray = JSON.parse(retrievedData);
-//     gameLocation = parsedArray;
-//     displayScoreLocalStorage();
-//   }
-// }
-
 function displayWinsPlayer1() {
   var retrievedData = JSON.parse(localStorage.getItem("Player 1 wins"));
   if (retrievedData) {
