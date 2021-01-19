@@ -37,6 +37,8 @@ function onLoad(){
   displayWinsPlayer2();
 }
 
+// Kayla, please see foot note at bottom of this page for following function question
+
 function displayWinsPlayer1() {
   var retrievedData = JSON.parse(localStorage.getItem("Player 1 wins"));
   if (retrievedData) {
@@ -187,3 +189,20 @@ function draw() {
   addClass(p2Stack, "hidden");
   updateSubheader();
 }
+
+
+
+
+//Footnote question - I tried to refactor the wet displayWinsPlayer1 and displayWinsPlayer2 functions, but it didn't like me passing game.player1.wins as an argument. I tried a myriad of approaches, but nothing worked. Could you help me understand as to why it doesn't like dot notation as an argument?
+
+// displayWins("Player 1 wins", game.player1.wins);
+// displayWins("Player 2 wins", game.player2.wins);
+//
+// function displayWins(item, gameLocation) {
+//   var retrievedData = JSON.parse(localStorage.getItem(item));
+//   if (retrievedData) {
+//     var parsedArray = JSON.parse(retrievedData);
+//     gameLocation = parsedArray;
+//     displayScoreLocalStorage();
+//   }
+// }
