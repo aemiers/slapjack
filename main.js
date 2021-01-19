@@ -11,6 +11,7 @@ var p2Score = document.querySelector(".player-two-score");
 window.addEventListener("load", onLoad());
 document.addEventListener("keydown", function(event) {
   if (event.key === "q" && game.currentPlayer === game.player1) {
+    console.log("main 14")
     playCard(game.player1);
   }
   else if (event.key === "p" && game.currentPlayer === game.player2) {
@@ -21,7 +22,9 @@ document.addEventListener("keydown", function(event) {
   }
   else if (event.key === "j") {
     playerSlapped(game.player2, game.player1);
-
+  }
+  else if (event.key === "Enter") {
+    location.reload();
   }
 });
 
@@ -85,6 +88,7 @@ function playerPileVisibility() {
 function showCurrentCard() {
   if (game.centerPile.length === 52) {
     draw();
+    console.log("main 91")
   } else {
     playedCard.src = game.centerPile[0].imgsrc;
   }
@@ -158,10 +162,12 @@ function updateSubheader() {
     subheader.innerText = `${game.gameMessage} ${game.winner.id} wins the game!`;
   } else if (game.won === false && game.centerPile[0].value === 11 && game.slapper !== game.currentPlayer) {
     subheader.innerText = `${game.gameMessage}`;
-  } else if (game.player1.hand.length === 0 && game.player2.hand.length === 0) {
+  } else if (game.player1.hand.length === 0 && game.player2.hand.length === 0 && game.gameMessage !== "Draw!") {
+    console.log("main 166")
     subheader.innerText = `${game.gameMessage}`;
   } else if (game.gameMessage === "Draw!") {
-    subheader.innerText = `${game.gameMessage}`;
+    subheader.innerText = `${game.gameMessage} To start a new game, press ENTER.`;
+    console.log("168 main")
   }
 }
 
@@ -170,4 +176,9 @@ function draw() {
   addClass(p1Stack, "hidden");
   addClass(p2Stack, "hidden");
   updateSubheader();
+  console.log("main 177")
+}
+
+function newGame() {
+
 }

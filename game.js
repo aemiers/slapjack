@@ -151,6 +151,8 @@ class Game {
   }
 
   resetDeck() {
-// newgame
+    if (this.won === true || this.gameMessage === "Draw!") {
+      
+    }
   }
 }
