@@ -8,6 +8,7 @@ class Game {
     this.slapper = this.player1;
     this.unslapper = this.player2;
     this.gameMessage = "SLAPJACK!";
+    this.suddenDeath = false;
     this.won = false;
   }
 
@@ -39,34 +40,40 @@ class Game {
     if (this.player1.hand !== [] && this.player2.hand !== []) {
       this.alternateTurns();
     } else if (this.player1.hand === [] || this.player2.hand === []) {
-      this.suddenDeath();
+      this.suddenDeath = true;
+      console.log("game 44")
     }
   }
+
+  // turnHandler() {
+  //   if (this.suddenDeath = false) {
+  //     this.alternateTurns();
+  //     console.log("alternate turns")
+  //   }
+  //   else if (this.suddenDeath = true) {
+  //     suddenDeath();
+  //   }
+  // }
 
   alternateTurns() {
     if (this.currentPlayer === this.player1) {
       this.currentPlayer = this.player2;
+      console.log("player 2's turn")
     } else {
-      this.currentPlayer = this.player1;
-    }
-  }
-
-  suddenDeath() {
-    // this.currentPlayer = currentPlayer;
-    if (this.player1.hand === []) {
-      this.currentPlayer = this.player2;
-    } else if (this.player2.hand === []){
       this.currentPlayer = this.player1;
     }
   }
 
   addToCenterPile() {
     this.centerPile.unshift(this.currentPlayer.playCard());
+    console.log(this.centerPile);
+    console.log(this.player1.hand);
   }
 
-  whoSlapped(slapper, unslapper) {
-    this.slapper = slapper;
-    this.unslapper = unslapper;
+  whoSlapped(slappee, unslappee) {
+    this.slapper = slappee;
+    this.unslapper = unslappee;
+    console.log("who slapped function")
   }
 
   addCenterPileToSlapper() {
@@ -95,9 +102,9 @@ class Game {
     } else if (this.centerPile.length > 1 && this.centerPile[0].value === this.centerPile[1].value) {
       this.slapWinScenario();
       this.gameMessage = "DOUBLE!!";
-    } else if (this.centerPile.length > 1 && this.centerPile[0].value === this.centerPile[2].value) {
+    } else if (this.centerPile.length > 2 && this.centerPile[0].value === this.centerPile[2].value) {
       this.slapWinScenario();
-      this.gameMessage = "SLAPJACK!";
+      this.gameMessage = "SANDWICH!";
     } else if (this.centerPile.length <= 1 && this.centerPile[0].value !== 11) {
       this.slapPunishment();
       this.gameMessage = "YOU CAN'T DO THAT!";
@@ -107,11 +114,52 @@ class Game {
     }
   }
 
-  updateWins() {
+  activateSuddenDeath() {
+    console.log("suddendeath activated")
+    this.suddenDeath = true;
+  }
+
+  suddenDeathSlap() {
+    if (this.centerPile[0].value === 11 && this.slapper === this.currentPlayer) {
+      console.log("game 123")
+      this.gameWin();
+    } else if (this.centerPile[0].value !== 11 && this.slapper === this.currentPlayer) {
+      console.log("game 126")
+      this.gameMessage = "FALSE SLAP! Penalty card to other player!"
+      this.suddenDeath = false;
+      this.slapPunishment();
+    } else if (this.centerPile[0].value === 11 && this.slapper !== this.currentPlayer) {
+      console.log("game 131")
+      this.suddenDeath = false;
+      this.gameMessage = "Back in the game!";
+      this.slapWinScenario();
+    } else if (this.centerPile[0].value !== 11 && this.slapper !== this.currentPlayer) {
+      console.log("game 136")
+      this.won = true;
+      this.unslapper.wins += 1;
+      this.gameMessage = "WE HAVE A WINNER!";
+
+    }
+  }
+
+  gameWin(){
+    console.log("128");
     this.won = true;
+    this.gameMessage = "WE HAVE A WINNER!";
+    this.updateWins();
+  }
+
+  updateWins() {
+    this.slapper.wins += 1;
   }
 
   resetDeck() {
 // newgame
+  }
+
+  draw() {
+    if (this.player1.hand.length === 0 & this.player2.hand.length === 0) {
+      this.gameMessage = "Draw!";
+    }
   }
 }
