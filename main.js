@@ -67,10 +67,10 @@ function centerPileColor() {
 function playerPileVisibility() {
   if (game.player1.hand.length === 0) {
     addClass(p1Stack, "hidden");
-    game.activateSuddenDeath;
+    game.activateSuddenDeath();
   } else if (game.player2.hand.length === 0) {
     addClass(p2Stack, "hidden");
-    game.activateSuddenDeath;
+    game.activateSuddenDeath();
   } else {
     removeClass(p1Stack, "hidden");
     removeClass(p2Stack, "hidden");
@@ -100,9 +100,8 @@ function playCard(player) {
   }
 }
 
-
-function playerSlapped(slappee, unslappee) {
-  game.whoSlapped(slappee, unslappee);
+function playerSlapped(hare, tortoise) {
+  game.whoSlapped(hare, tortoise);
   if (game.suddenDeath === false) {
     game.slap();
     slapOutcome()
@@ -124,7 +123,7 @@ function slapOutcome() {
 function suddenDeathOutcome() {
   if (game.won === true) {
     updateSubheader();
-    updateScore(game.slapper.wins, game.slapper.id);
+    updateScore(game.winner.wins, game.slapper.id);
   } else if (game.won === false) {
     updateSubheader();
     playerPileVisibility();
@@ -138,7 +137,7 @@ function updateSubheader() {
   } else if (game.centerPile.length >= 1 && game.won === false) {
     subheader.innerText = `${game.gameMessage} ${game.slapper.id} loses a card!`;
   } else if (game.won === true) {
-    subheader.innerText = `${game.gameMessage} ${game.slapper.id} wins the game!`;
+    subheader.innerText = `${game.gameMessage} ${game.winner.id} wins the game!`;
   } else if (game.won === false && game.centerPile[0].value === 11 && game.slapper !== game.currentPlayer) {
     subheader.innerText = `${game.gameMessage}`;
   }

@@ -7,8 +7,9 @@ class Game {
     this.cards = cards;
     this.slapper = this.player1;
     this.unslapper = this.player2;
-    this.gameMessage = "SLAPJACK!";
+    this.gameMessage = "ERROR!";
     this.suddenDeath = false;
+    this.winner = "";
     this.won = false;
   }
 
@@ -39,26 +40,21 @@ class Game {
   turnHandler() {
     if (this.player1.hand !== [] && this.player2.hand !== []) {
       this.alternateTurns();
-    } else if (this.player1.hand === [] || this.player2.hand === []) {
+    } else if (this.player1.hand === []) {
+      this.currentPlayer = this.player2;
       this.suddenDeath = true;
-      console.log("game 44")
+      console.log("game 45")
+    } else if (this.player2.hand === []) {
+      this.currentPlayer = this.player1;
+      this.suddenDeath = true;
+      console.log("game 49")
     }
   }
-
-  // turnHandler() {
-  //   if (this.suddenDeath = false) {
-  //     this.alternateTurns();
-  //     console.log("alternate turns")
-  //   }
-  //   else if (this.suddenDeath = true) {
-  //     suddenDeath();
-  //   }
-  // }
 
   alternateTurns() {
     if (this.currentPlayer === this.player1) {
       this.currentPlayer = this.player2;
-      console.log("player 2's turn")
+      console.log("player 2's turn game 67")
     } else {
       this.currentPlayer = this.player1;
     }
@@ -70,9 +66,9 @@ class Game {
     console.log(this.player1.hand);
   }
 
-  whoSlapped(slappee, unslappee) {
-    this.slapper = slappee;
-    this.unslapper = unslappee;
+  whoSlapped(hare, tortoise) {
+    this.slapper = hare;
+    this.unslapper = tortoise;
     console.log("who slapped function")
   }
 
@@ -122,6 +118,7 @@ class Game {
   suddenDeathSlap() {
     if (this.centerPile[0].value === 11 && this.slapper === this.currentPlayer) {
       console.log("game 123")
+      this.winner = this.slapper;
       this.gameWin();
     } else if (this.centerPile[0].value !== 11 && this.slapper === this.currentPlayer) {
       console.log("game 126")
@@ -130,15 +127,13 @@ class Game {
       this.slapPunishment();
     } else if (this.centerPile[0].value === 11 && this.slapper !== this.currentPlayer) {
       console.log("game 131")
-      this.suddenDeath = false;
       this.gameMessage = "Back in the game!";
+      this.suddenDeath = false;
       this.slapWinScenario();
     } else if (this.centerPile[0].value !== 11 && this.slapper !== this.currentPlayer) {
-      console.log("game 136")
-      this.won = true;
-      this.unslapper.wins += 1;
-      this.gameMessage = "WE HAVE A WINNER!";
-
+      console.log("game 136");
+      this.winner = this.unslapper;
+      this.gameWin();
     }
   }
 
@@ -150,7 +145,7 @@ class Game {
   }
 
   updateWins() {
-    this.slapper.wins += 1;
+    this.winner.wins += 1;
   }
 
   resetDeck() {
